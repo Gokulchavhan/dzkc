@@ -1,2 +1,2 @@
 <?php
-return require_once LARAVEL_DIR.'/bootstrap/app.php';
+return require LARAVEL_DIR.'/bootstrap/app.php';

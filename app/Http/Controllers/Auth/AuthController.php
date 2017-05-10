@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Http\Request;
+
 class AuthController extends Controller
 {
     /*
@@ -74,7 +76,7 @@ class AuthController extends Controller
     }
     
     //登陆页面
-    public function getLogin(Request $request)
+    public function showLoginForm(Request $request)
     {
         $arr = array('status'=>'200');
         $reque = $request->all();
@@ -83,7 +85,7 @@ class AuthController extends Controller
             'details'      => 'required',
             '_secret'      => 'required',
         ];
-         
+        
         $v = Validator::make($reque, $rules);
          
         if ($v->fails()) {
@@ -98,7 +100,7 @@ class AuthController extends Controller
             $arr['status'] = 2;
             return response($reque['callback'].'('.json_encode($arr).')');die;
         }
-         
+        
         return response($reque['callback'].'('.json_encode($arr).')')->withCookie(Cookie::forever('nk', $user_cont['nk']))->withCookie(Cookie::forever('uid',$user_cont['uid']));
     
         //return view('auth.login');
@@ -107,7 +109,7 @@ class AuthController extends Controller
     /**
      * 登出
      */
-    public function getLogout(Request $request)
+    public function logout(Request $request)
     {
         $reque = $request->all();
         $arr = array('status'=>'200');
