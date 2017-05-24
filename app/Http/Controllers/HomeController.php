@@ -44,7 +44,7 @@ class HomeController extends Controller
 //         ]);
         
 //         echo $res->getBody();die;
-         
+        
         
         return view('home');
     }
